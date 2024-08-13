@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Az Idő Jós</title>
+    <link rel="icon" href="https://pacuka.github.io/Website/favicon.ico" type="image/x-icon">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        body {
+            font-family: Montserrat, sans-serif;
+            font-weight: bold;
+            background-color: #fff;
+            color: #000;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+        body.dark-mode {
+            background-color: #111;
+            color: #fff;
+        }
+        header {
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            background-color: #4CAF50;
+            color: #fff;
+            border-radius: 20px;
+            animation: slideInFromTop 1s ease;
+            margin-bottom: 20px;
+        }
+        #content-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+            padding-top: 100px;
+            border-radius: 20px;
+            flex: 1 0 auto;
+        }
+        section {
+            width: 100%;
+            max-width: 800px;
+            padding: 50px;
+            margin: 20px 0;
+            border-radius: 10px;
+            background-color: #333;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            animation: slideInFromBottom 1s ease;
+        }
+        section h2 {
+            margin-bottom: 20px;
+        }
+        section.dark-mode {
+            background-color: #111;
+            color: #fff;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: #fff;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            animation: slideInFromBottom 1s ease;
+            margin-top: 30px;
+            flex-shrink: 0;
+        }
+        .linnnk {
+            color: white;
+        }
+        h3 {
+            margin: 20px;
+            font-size: large;
+        }
+        .hely {
+            margin: 20px;
+        }
+        .vertical-separator {
+            border-left: 1px solid #ddd;
+            margin: 0 10px;
+        }
+        .rflog, .mail, .musik, .dc {
+            width: 100px;
+            height: 100px;
+            max-width: 100px;
+            margin: 0;
+            transition: transform 0.2s ease;
+            display: block;
+            margin: auto;
+        }
+        .rflog:hover, .mail:hover, .musik:hover, .dc:hover {
+            transform: scale(1.1);
+        }
+        .theme {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 9999;
+            cursor: pointer;
+            background-color: transparent;
+            border: none;
+            color: #000;
+            font-size: 24px;
+            transition: color 0.5s ease;
+        }
+        body.dark-mode .theme {
+            color: #fff;
+        }
+        .contact {
+            display: flex;
+            justify-content: center;
+        }
+        .contact a {
+            margin: 0 10px;
+        }
+        #prediction {
+            font-size: 80px;
+            color: #007BFF;
+            margin: 120px;
+        }
+        .joslas{
+            background: none;
+            background-color: #4CAF50;
+            padding: 5px 20px;
+            border: white solid 2px;
+            border-radius: 15px;
+            color: white;
+            font-size: 40px;
+        }
+        .vissza{
+            margin-top: 10px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .vissza:hover{
+            color: rgb(25, 13, 199);
+        }
+    </style>
+</head>
+<body class="dark-mode">
+    <button class="theme" id="themeToggle" aria-label="Toggle Dark Mode">☀️</button>
+    <div id="content-container">
+        <header>
+            <h1>Üdvözöl az Idő Jós!</h1>
+            <p>Itt megtudhatod, hogy mennyi idő mulva lesz mennyi idő!</p>
+            <a class="vissza" href="pacuka.github.io/Website/">Vissza a főoldalra</a>
+        </header>
+        <div id="prediction"></div>
+        <button class="joslas" onclick="predictTime()">Jósolj még!</button>
+    </div>
+    <footer>
+        <p>© 2024 Pacuka.hu. Minden jog fenntartva. Not associated or approved by <a class="linnnk" href="https://duxy.hu/">Duxy.hu</a></p>
+        <p>Készítette: Pacuka</p>
+        <p>Kapcsolat:👇</p>
+        <div class="contact">
+            <a href="mailto:pacuka@etik.com"><img class="mail" src="https://webmail.vivaldi.net/logo/Webmail-logo-blue.png" alt="E-mail"></a>
+            <a href="https://discordapp.com/users/711460576236404738"><img class="dc" src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a69f118df70ad7828d4_icon_clyde_blurple_RGB.svg" alt="Discord"></a>
+        </div>
+    </footer>
+    <script>
+        function predictTime() {
+            const randomMinutes = Math.floor(Math.random() * 60) + 1; // Generates a random number between 1 and 60
+            const now = new Date();
+            now.setMinutes(now.getMinutes() + randomMinutes); // Sets the random minutes to the current time
+
+            // Formats the hour and minutes to be two-digit
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+
+            document.getElementById('prediction').innerText = `${randomMinutes} perc múlva: ${hours}:${minutes}`;
+        }
+
+        // Run the prediction when the page loads
+        window.addEventListener('DOMContentLoaded', (event) => {
+            predictTime();
+        });
+
+        const hamburgerIcon = document.getElementById('hamburgerIcon');
+        const nav = document.querySelector('nav');
+        const themeToggle = document.getElementById('themeToggle');
+
+        hamburgerIcon.addEventListener('click', () => {
+            nav.classList.toggle('show-nav');
+        });
+
+        const darkModeCookie = document.cookie.split('; ').find(row => row.startsWith('darkMode='));
+        if (darkModeCookie) {
+            const darkModeEnabled = darkModeCookie.split('=')[1] === 'true';
+            document.body.classList.toggle('dark-mode', darkModeEnabled);
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            document.cookie = `darkMode=${isDarkMode}; path=/`;
+        });
+    </script>
+</body>
+</html>
