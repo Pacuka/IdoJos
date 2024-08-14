@@ -175,28 +175,18 @@
     </footer>
     <script>
         function predictTime() {
-            const randomMinutes = Math.floor(Math.random() * 60) + 1; // Generates a random number between 1 and 60
+            const randomMinutes = Math.floor(Math.random() * 60) + 1;
             const now = new Date();
-            now.setMinutes(now.getMinutes() + randomMinutes); // Sets the random minutes to the current time
+            now.setMinutes(now.getMinutes() + randomMinutes);
 
-            // Formats the hour and minutes to be two-digit
             const hours = now.getHours().toString().padStart(2, '0');
             const minutes = now.getMinutes().toString().padStart(2, '0');
 
             document.getElementById('prediction').innerText = `${randomMinutes} perc múlva: ${hours}:${minutes}`;
         }
-
-        // Run the prediction when the page loads
+        
         window.addEventListener('DOMContentLoaded', (event) => {
             predictTime();
-        });
-
-        const hamburgerIcon = document.getElementById('hamburgerIcon');
-        const nav = document.querySelector('nav');
-        const themeToggle = document.getElementById('themeToggle');
-
-        hamburgerIcon.addEventListener('click', () => {
-            nav.classList.toggle('show-nav');
         });
 
         const darkModeCookie = document.cookie.split('; ').find(row => row.startsWith('darkMode='));
